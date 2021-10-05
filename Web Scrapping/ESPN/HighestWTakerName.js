@@ -17,7 +17,7 @@ function cb(err, res, html) {
 function extractHTML(html) {
     let selectorTool = cheerio.load(html);
     let bowlerTableArr = selectorTool(
-        ".card.content-block.match-scorecard-table .table.bowler"
+        ".table.bowler"
     )
     // console.log(bowlerTableArr.length);
 
@@ -27,17 +27,18 @@ function extractHTML(html) {
     for (let i = 0; i < bowlerTableArr.length; i++) {
         let bowlerTable = selectorTool(bowlerTableArr[i]);
         let allBowlersRow = selectorTool(bowlerTable).find("tbody>tr");
-
+    
         // console.log(bowlerTable);
         // console.log(allBowlers.length);
 
         for (let j = 0; j < allBowlersRow.length; j++) {
             let colOfEachPlayerArr = selectorTool(allBowlersRow[j]).find("td");
             // console.log(colOfEachPlayerArr.length);
-
+        
+        
             let playerName = selectorTool(colOfEachPlayerArr[0]).text();
             let currNumOfWickets = selectorTool(colOfEachPlayerArr[4]).text();
-
+            
             if (colOfEachPlayerArr.length == 1) continue;
 
             // console.log(playerName);
